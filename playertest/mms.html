@@ -1,0 +1,20 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script>
+function J_get(name){
+var js_get =self.window.document.location.href;
+var start =js_get.split('.html?' + name + '=');
+if (start.length==1) return '';
+return unescape(start[1]);}
+var playurl = J_get('url');
+</script>
+</head>
+<body topmargin="0" leftmargin="0" bgcolor="#000000" scroll=no>
+<script>
+document.write('<object id="myPlayer" height="100%" width="100%" classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6"><param NAME="URL" VALUE="'+playurl+'"><param NAME="rate" VALUE="1"><param NAME="balance" VALUE="0"><param NAME="currentPosition" VALUE="0"><param NAME="defaultFrame" VALUE><param NAME="playCount" VALUE="1"><param NAME="autoStart" VALUE="-1"><param NAME="currentMarker" VALUE="0"><param NAME="invokeURLs" VALUE="-1"><param NAME="baseURL" VALUE><param NAME="volume" VALUE="100"><param NAME="mute" VALUE="0"><param NAME="uiMode" VALUE="mini"><param NAME="stretchToFit" VALUE="-1"><param NAME="windowlessVideo" VALUE="0"><param NAME="enabled" VALUE="-1"><param NAME="enableContextMenu" VALUE="0"><param NAME="fullScreen" VALUE="0"><param NAME="enableErrorDialogs" VALUE="0"><param NAME="_cx" VALUE="16404"><param NAME="_cy" VALUE="10583"></object>');
+</script>
+</body>
+
+</html>

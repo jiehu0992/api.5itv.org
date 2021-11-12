@@ -1,0 +1,19 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<script src="ckplayer.js"></script>
+</head>
+<body topmargin="0" leftmargin="0" scroll="no">
+
+<div id="a1"></div>
+<script type="text/javascript">
+var playurl = J_get('url');
+	var flashvars={
+		f:'m3u8.swf',a:playurl,b:'1',s:'4',c:'0',v:'100',p:'1'};
+	var params={bgcolor:'#FFF',allowFullScreen:true,allowScriptAccess:'always',wmode:'transparent'};
+	CKobject.embedSWF('ckplayer.swf','a1','ckplayer_a1','100%','100%',flashvars,params);
+  </script>
+</script>
+</body>
+</html>

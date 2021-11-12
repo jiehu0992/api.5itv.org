@@ -1,0 +1,172 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>麻麻视听</title>
+<script language="JavaScript" src=img/g.js></script>
+   <style type="text/css">
+   <!--
+   body {overflow:hidden;font-size: 25px;margin: 0px;background-color: #000000;}
+   -->
+   </style>
+   <script type="text/javascript" language="javascript">
+function $(oid){ return document.getElementById(oid) };
+function img_mouseover(A){ var _=$("img"+A);
+if(_)_.src="img/"+A+"_HOVER.gif" };
+function img_mouseout(A){ var _=$("img"+A);
+if(_)_.src="img/"+A+"_NORMAL.gif" };
+function scale_onclick(s){  var vlc_Player=$("vlcPlayer");
+if (vlc_Player){  vlc_Player.video.aspectRatio=s;  } }
+function getSearch() { try{
+   		var url=location.search.replace(/&amp;/g,'#'),i;
+   		var lss=url.substr(url.indexOf('?')+1).split('&');
+   		for(i=0;i<lss.length;i++) if (lss[i].toLowerCase().indexOf(arguments[0].toLowerCase()+'=')==0) return decodeURIComponent(lss[i].substr(lss[i].indexOf('=')+1).replace(/\#/g,'&amp;'));
+} catch(e) {}
+return ''; }	
+</script>
+</head>
+   <body scroll="no">
+   <table style="border:0px; width:100%; height:100%" cellpadding="0" cellspacing="0">
+   <tr>  <tr style="height:100%;display:block;background-color:#000" id="trADV"><td id="tdPlayer" style="vertical-align: middle">
+</td></tr>
+   <tr style="height:16px;background-color:#000000" id="trWMP"><td>
+   <div id="playClavier" style="background:url('img/bj.gif') repeat-x;height:25px; width:100%;margin:0 ;">
+   <div id="playA" style="margin-left:0px;float:left; margin-top:0px;display:none;cursor: pointer;"><img id="imagePlay" alt="播放" src="img/Play_NORMAL.gif" onMouseOver="img_mouseover('Play')" onMouseOut="img_mouseout('Play')" onClick="imgDoPlay_onclick()" /></div> 
+   <div id="pauseA" style="margin-left:0px;float:left; margin-top:0px;display:block;cursor: pointer;"><img id="imagePause" alt="暂停" src="img/Pause_NORMAL.gif" onMouseOver="img_mouseover('Pause')" onMouseOut="img_mouseout('Pause')" onClick="imgDoPlay_onclick()" /></div>  
+    <div style="margin-left:0px;float:left; margin-top:0px;display:block;cursor: pointer;"><img alt="" src="img/s.gif" /></div> 
+    <div id="pressA" style="margin-left:0px;float:left; margin-top:0px;display:block;cursor: pointer;"><img id="image4x3" alt="屏幕设置4:3" src="img/4x3_NORMAL.gif" onMouseOver="img_mouseover('2x1')" onMouseOut="img_mouseout('2x1')" onClick="scale_onclick('2:1')" /></div>
+    <div style="margin-left:0px;float:left; margin-top:0px;display:block;cursor: pointer;"><img alt="" src="img/s.gif" /></div>
+    <div id="pressC" style="margin-left:0px;float:left; margin-top:0px;display:block;cursor: pointer;"><img id="image16x10" alt="屏幕设置16:10" src="img/16x10_NORMAL.gif" onMouseOver="img_mouseover('16x10')" onMouseOut="img_mouseout('16x10')" onClick="scale_onclick('16:10')" /></div>
+    <div style="margin-left:0px;float:left; margin-top:0px;display:block;cursor: pointer;"><img alt="" src="img/s.gif" /></div>
+    <div id="pressB" style="margin-left:0px;float:left; margin-top:0px;display:block;cursor: pointer;"><img id="image16x9" alt="屏幕设置16:9" src="img/16x9_NORMAL.gif" onMouseOver="img_mouseover('16x9')" onMouseOut="img_mouseout('16x9')" onClick="scale_onclick('16:9')" /></div>  
+    <div style="margin-left:0px;float:left; margin-top:0px;display:block;cursor: pointer;"><img alt="" src="img/s.gif" /></div> 
+    <div id="spreadA" style="margin-right:0px;float:right; margin-top:0px;display:block;"><img src="img/FULLSCREEN_NORMAL.gif" alt="全屏" title="全屏" id="imge/FULLSCREEN_NORMAL.gif" style="cursor:pointer;border:0;" onMouseOver="img_mouseover('FullScreen')" onClick="imgDoFullScreen_onclick()" onMouseOut="img_mouseout('FullScreen');hiddenTip()" /> </div> 
+    <div style="margin-right:0px;float:right; margin-top:0px;display:block;"><img alt="" src="img/s.gif" /></div>
+    <div id="voxA" style="margin-right:0px;float:right; margin-top:0px;display:block;cursor: pointer;"><img  id="imageMUTE"alt="静音"  src="img/MUTE_NORMAL.gif" onMouseOver="img_mouseover('MUTE')" onMouseOut="img_mouseout('MUTE')" onClick="imgDoMute_onclick()" /> </div> 
+    <div id="voxB" style="margin-right:0px;float:right; margin-top:0px;display:none;cursor: pointer;"><img id="imageUNMUTE"alt="取消静音" src="img/UNMUTE_NORMAL.gif"  onMouseOver="img_mouseover('UNMUTE')" onMouseOut="img_mouseout('UNMUTE')"onClick="imgDoNoMute_onclick()" /> </div> 
+    <div id="dStatus" style="margin-left:10px;margin-top:6px;float:left; color:#008b00;font-size:12px;display:block;"></div>
+   </td></tr>
+   </table> 
+   <SCRIPT language='JavaScript' type="text/javascript">
+var tv_url;
+var encode_soft="vlcPlayer";
+RunPlayer=function(tvurl,encodesoft){
+var tvurl=location.search;
+tvurl=tvurl.substring(1,tvurl.length);
+   	var ocxinfo="<object type='application/x-vlc-plugin' id='vlcPlayer' classid='CLSID:9BE31822-FDAD-461B-AD51-BE1D1C159921'>"+
+   				"<param name='autoPlay' value='true' />"+
+   				"<param name='Loop' value='yes' />"+
+   				"<param name='allowfullscreen' value='true' />"+
+   				"<param name='toolbar' value='false' />"+
+   				"<param name='mrl' value='"+tvurl+"' />"+
+   				"</embed>"+
+   				"</object>";
+   
+   	document.getElementById("tdPlayer").innerHTML=ocxinfo;
+   	var pps= document.getElementById('vlcPlayer');
+   	if (pps){ P2P_Installed = typeof(pps.Volume) != "undefined" ? 1:-1; }
+   	if (P2P_Installed>0){
+       Play_Play(tvurl);
+       setInterval(function(){document.getElementById("dStatus").innerHTML = checkvclwld();},2000);
+   	}else{
+       RunUUSee_E(encodesoft)
+   	}
+   }
+   
+   Play_Play=function(b){
+     vlcPlayer.style.width='100%';
+     vlcPlayer.style.height='100%';
+   }	
+ 
+   RunUUSee_E=function(b){	
+     var curnosetupinfo="<div style='width:360px;margin:auto;text-align:left'><br>"+
+     "<span>收看该节目需要安装播放器，<br>请点击下载<a href='http://www.wlds.net/help/encodesoft.htm?"+b+"' target='_blank'><font color='#F4E109'>播放器VLC Player<\/font><\/a>安装。<br><br><\/span>"+
+     "<br><br><div style='text-align:left'>如果您已经安装了软件，仍不能正常播放：<br><font color=red>1.请检查IE安全级别是否过高(建议设置成为中高级别)<br><\/font><br><br><span style='color:#fff;font-size:14px'></span><\/div>"+
+     "</div>";
+       document.getElementById("tdPlayer").innerHTML="<div id=nosetup style='color:#fff'>"+curnosetupinfo+"</div>";
+         window.setTimeout('RunPlayer(tv_url,encode_soft)',1000);
+   }
+   
+   	  tv_url=getSearch("id");
+   	  RunPlayer(tv_url,encode_soft);	
+</script>
+   <script type="text/javascript">  
+   var vcount = 0;
+   function checkvclwld()
+   { 
+   	switch(vlcPlayer.input.state)
+   	{
+   		case 1: 		
+   			return "正在连接，请稍等...";		
+   			break;
+   		case 2:
+   			return "节目加载中...";
+   			break;
+   		case 3:
+   			return "播放中...";
+   			break;
+   		case 4:
+   			return "直播暂停";
+   			break;
+   		case 5:
+   			return "信号已停止";
+   			break;
+   		case 6:
+   			return "信号已结束，稍候再试";
+   			break;
+   		case 7:
+              vcount++;
+              if(vcount<5)
+             {
+              vlcPlayer.playlist.stop();
+              vlcPlayer.playlist.play();
+             return "正在进行第"+vcount+"次重试";
+              }
+   			return "信号暂时错误，稍候再试";
+   			break;
+   		default:
+   			return "缓冲中";
+   		      
+   }	
+   }
+    function imgDoPlay_onclick() {  
+  imgDoPlay = document.getElementById("playA");
+  imgDoPause = document.getElementById("pauseA");
+  if (imgDoPlay.style.display == 'block'){
+  if( vlcPlayer.playlist.play() ) vlcPlayer.playlist.togglePause();
+   if (imgDoPause) imgDoPause.style.display = 'none';
+ if (imgDoPlay) imgDoPlay.style.display = 'block';  
+  } else {
+   if( vlcPlayer.playlist.togglePause() ) {vlcPlayer.playlist.play();}
+  if (imgDoPause) imgDoPause.style.display = 'block';
+ if (imgDoPlay) imgDoPlay.style.display = 'none';
+ }}   
+ 
+ function imgDoMute_onclick() {
+  imgDoMute = document.getElementById("voxB");
+  imgDoNoMute = document.getElementById("voxA");
+ if(vlcPlayer.audio.mute=1) {vlcPlayer.audio.mute=0;}else{vlcPlayer.audio.mute=1;}
+ if(vlcPlayer.audio.mute=1) {
+ if (imgDoMute) imgDoMute.style.display = 'block';
+ if (imgDoNoMute) imgDoNoMute.style.display = 'none';
+ }
+ else {
+ if (imgDoMute) imgDoMute.style.display = 'none';
+ if (imgDoNoMute) imgDoNoMute.style.display = 'block';
+ }}
+ function imgDoNoMute_onclick(){
+  if ( vlcPlayer.audio.mute=1 ){vlcPlayer.audio.mute=0;} 
+  imgDoMute = document.getElementById("voxB");
+  imgDoNoMute = document.getElementById("voxA");
+ if (imgDoMute) imgDoMute.style.display = 'none';
+ if (imgDoNoMute) imgDoNoMute.style.display = 'block'; 
+ }
+ 
+  function imgDoFullScreen_onclick(){
+ vlcPlayer.video.toggleFullscreen();} 
+ 
+ function $(id){return document.getElementById(id);}
+</script>
+<td width="0%"></script><script LANGUAGE="JavaScript"> 
+function click() { if (event.button==2) 
+{alert('欢迎使用麻麻视听'); } } document.onmousedown=click
+</script>

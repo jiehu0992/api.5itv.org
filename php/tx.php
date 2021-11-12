@@ -1,0 +1,1 @@
+http://zb.v.qq.com:1863/?progid=&ostype=ios&ostype=ios

@@ -1,0 +1,18 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Ckplayer</title>
+</head>
+<body topmargin="0" leftmargin="0" scroll="no">
+<div id="ckplayer">正在加载，请稍等...</div>
+<script type="text/javascript" src="ckplayer.js" charset="UTF-8"></script>
+<script type="text/javascript">
+var id = J_get('url');
+	var flashvars={f:''+id+'',s:'0',c:'0',t:'5',e:'2',v:'100',p:'1',b:'1'};
+	var params={bgcolor:'#000000',allowFullScreen:'true',allowScriptAccess:'always'};
+	var attributes={id:'ckplayer_a1',name:'ckplayer_a1'};
+	swfobject.embedSWF('ckplayer.swf', 'ckplayer', '100%', '100%', '9.0.0','expressInstall.swf', flashvars, params, attributes);
+</script>
+	
+</body>
+</html>
